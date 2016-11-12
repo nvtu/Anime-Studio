@@ -92,12 +92,13 @@ public class MainActivity extends AppCompatActivity{
         }
         linkCategory.add(animeLink);
         linkCategory.add(cartoonLink);
+        linkCategory.add("");
         linkCategory.add(longLink);
         linkCategory.add(shortLink);
         loadData(linkCategory.get(0) + String.valueOf(1), 0);
         loadData(linkCategory.get(1) + String.valueOf(1), 1);
-        loadData(linkCategory.get(2) + String.valueOf(1) + ".html", 3);
-        loadData(linkCategory.get(3) + String.valueOf(1) + ".html", 4);
+        loadData(linkCategory.get(3) + String.valueOf(1) + ".html", 3);
+        loadData(linkCategory.get(4) + String.valueOf(1) + ".html", 4);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity{
                             if (position>2){
                                 loadData(linkCategory.get(position) + String.valueOf(curPage[position]) +".html", position);
                             }
-                            else loadData(linkCategory.get(position) + String.valueOf(curPage[position]), position);
+                            else if (position < 2) loadData(linkCategory.get(position) + String.valueOf(curPage[position]), position);
                         }
 
                         @Override
@@ -411,7 +412,9 @@ public class MainActivity extends AppCompatActivity{
                         FilmInfo filmInfo = new FilmInfo(name, filmURL, numEps, imgURL, desFilm, position, false);
                         filmList[position].add(filmInfo);
                     }
-
+                    if (filmList[position].size() == 0) {
+                        Toast.makeText(MainActivity.this, "No result", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
                 recycleAdapter[position].notifyDataSetChanged();
