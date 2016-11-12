@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity" />
-        <activity android:name=".WatchActivity"></activity>
+        <activity android:name=".WatchActivity"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

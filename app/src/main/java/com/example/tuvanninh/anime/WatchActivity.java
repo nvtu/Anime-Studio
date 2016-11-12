@@ -179,23 +179,25 @@ public class WatchActivity extends AppCompatActivity implements UniversalVideoVi
     @Override
     public void onPause(MediaPlayer mediaPlayer) {
         Log.d(TAG, "onPause UniversalVideoView callback");
-
+        mSeekPosition = mediaPlayer.getCurrentPosition();
+        Log.d("abcd", String.valueOf(mSeekPosition));
     }
 
     @Override
     public void onStart(MediaPlayer mediaPlayer) {
         Log.d(TAG, "onStart UniversalVideoView callback");
+        mediaPlayer.seekTo(mSeekPosition);
     }
 
     @Override
     public void onBufferingStart(MediaPlayer mediaPlayer) {
         Log.d(TAG, "onBufferingStart UniversalVideoView callback");
-
     }
 
     @Override
     public void onBufferingEnd(MediaPlayer mediaPlayer) {
         Log.d(TAG, "onBufferingEnd UniversalVideoView callback");
+
     }
 
     @Override
@@ -224,7 +226,6 @@ public class WatchActivity extends AppCompatActivity implements UniversalVideoVi
                 int end = body.indexOf("\",label:", start);
                 if (start < 0 || end <0) return;
                 movieURL = body.substring(start,end);
-                Log.d("abcde", movieURL);
                 startFilm(movieURL);
 
                 if (firstLoad){
@@ -242,7 +243,6 @@ public class WatchActivity extends AppCompatActivity implements UniversalVideoVi
                 int end = body.indexOf("\",label:", start);
                 if (start < 0 || end <0) return;
                 movieURL = body.substring(start,end).replace('\\',' ').replaceAll(" ","");
-                Log.d("abcde", movieURL);
                 startFilm(movieURL);
 
                 if (firstLoad){

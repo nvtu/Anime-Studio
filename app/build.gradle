@@ -39,4 +39,5 @@ dependencies {
     compile 'info.hoang8f:fbutton:1.0.5'
     compile project(':universalvideoview')
     compile 'com.roger.catloadinglibrary:catloadinglibrary:1.0.1'
+    compile 'com.github.rtoshiro.fullscreenvideoview:fullscreenvideoview:1.1.2'
 }

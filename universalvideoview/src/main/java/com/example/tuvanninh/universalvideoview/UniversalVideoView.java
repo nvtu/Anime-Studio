@@ -595,6 +595,7 @@ public class UniversalVideoView extends SurfaceView
     public boolean onTouchEvent(MotionEvent ev) {
         if (isInPlaybackState() && mMediaController != null) {
             toggleMediaControlsVisibility();
+
         }
         return false;
     }
@@ -668,6 +669,7 @@ public class UniversalVideoView extends SurfaceView
             mMediaPlayer.start();
             mCurrentState = STATE_PLAYING;
             if (this.videoViewCallback != null) {
+                mMediaPlayer.seekTo(mSeekWhenPrepared);
                 this.videoViewCallback.onStart(mMediaPlayer);
             }
         }
@@ -681,8 +683,10 @@ public class UniversalVideoView extends SurfaceView
         if (isInPlaybackState()) {
             if (mMediaPlayer.isPlaying()) {
                 mMediaPlayer.pause();
+                mSeekWhenPrepared = mMediaPlayer.getCurrentPosition();
                 mCurrentState = STATE_PAUSED;
                 if (this.videoViewCallback != null) {
+                    mSeekPosition = mMediaPlayer.getCurrentPosition();
                     this.videoViewCallback.onPause(mMediaPlayer);
                 }
             }
@@ -798,6 +802,7 @@ public class UniversalVideoView extends SurfaceView
         mMediaController.toggleButtons(fullscreen);
         if (videoViewCallback != null) {
             videoViewCallback.onScaleChange(fullscreen);
+            videoViewCallback.onPause(mMediaPlayer);
         }
     }
 
